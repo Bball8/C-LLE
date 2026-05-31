@@ -40,7 +40,6 @@ public class CoopEpisodeManager : MonoBehaviour
     private bool[] onExit;
     private bool[] exitRewardGiven;
 
-    // Cache exit trigger for reliable reset + exitTransform discovery
     private ExitTrigger exitTrigger;
 
     public int AgentCount => (agents != null) ? agents.Length : 0;
@@ -88,7 +87,6 @@ public class CoopEpisodeManager : MonoBehaviour
 
         exitTrigger = FindFirstObjectByType<ExitTrigger>();
 
-        // NEW: expose exit transform for agent observations
         if (exitTransform == null && exitTrigger != null)
             exitTransform = exitTrigger.transform;
 
@@ -208,7 +206,6 @@ public class CoopEpisodeManager : MonoBehaviour
         if (ending) return;
         ending = true;
 
-        // Log rewards BEFORE ending episodes (cumulative reward is per-episode)
         float sum = 0f;
         for (int i = 0; i < agents.Length; i++)
         {
@@ -239,12 +236,10 @@ public class CoopEpisodeManager : MonoBehaviour
             exitRewardGiven[i] = false;
         }
 
-        // Reset exit trigger contacts so it re-detects after teleport
         if (exitTrigger == null)
             exitTrigger = FindFirstObjectByType<ExitTrigger>();
         exitTrigger?.ResetExit();
 
-        // Keep exitTransform up to date (in case scenes differ)
         if (exitTransform == null && exitTrigger != null)
             exitTransform = exitTrigger.transform;
 
@@ -273,8 +268,7 @@ public class CoopEpisodeManager : MonoBehaviour
                 a.transform.rotation = defaultSpawnRot[i];
             }
         }
-
-        // Make physics/trigger state consistent after teleports
+        
         Physics.SyncTransforms();
 
         for (int i = 0; i < gems.Length; i++)

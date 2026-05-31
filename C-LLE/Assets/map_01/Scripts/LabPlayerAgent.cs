@@ -27,7 +27,7 @@ public class LabPlayerAgent : Agent
     private int holdCounter = 0;
 
     [Header("Control Smoothing")]
-    public int actionRepeat = 4; // hold same action
+    public int actionRepeat = 14; // hold same action
 
     private bool onExit;
 
@@ -78,34 +78,25 @@ public class LabPlayerAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Coordinate frame used for control/actions in your project:
-        // right = +Z, up = -X, down = +X
-        // We'll express key observations (pos/vel/goals) in this same (right, up) frame.
-
-        // Id one-hot (4)
         sensor.AddObservation(playerIndex == 0 ? 1f : 0f);
         sensor.AddObservation(playerIndex == 1 ? 1f : 0f);
         sensor.AddObservation(playerIndex == 2 ? 1f : 0f);
         sensor.AddObservation(playerIndex == 3 ? 1f : 0f);
 
-        // Position in control frame: (right, up)
         Vector3 p = transform.position;
         float posRight = p.z / mapNorm;
         float posUp = -p.x / mapNorm;
         sensor.AddObservation(posRight);
         sensor.AddObservation(posUp);
 
-        // Velocity in control frame: (right, up)
         Vector3 v = rb.linearVelocity;
         float velRight = v.z / 10f;
         float velUp = -v.x / 10f;
         sensor.AddObservation(velRight);
         sensor.AddObservation(velUp);
 
-        // On-exit
         sensor.AddObservation(onExit ? 1f : 0f);
 
-        // --- Exit relative features in control frame (right, up, dist) ---
         Transform exitT = (episode != null) ? episode.exitTransform : null;
         if (exitT != null)
         {
@@ -123,10 +114,8 @@ public class LabPlayerAgent : Agent
             sensor.AddObservation(0f);
         }
 
-        // Gems list
         GameObject[] gemList = (episode != null) ? episode.gems : null;
 
-        // --- Nearest active gem relative features in control frame (right, up, dist, anyRemaining) ---
         float anyGemRemaining = 0f;
         Vector3 bestD = Vector3.zero;
         float bestDistSqr = float.PositiveInfinity;
@@ -165,7 +154,6 @@ public class LabPlayerAgent : Agent
         }
         sensor.AddObservation(anyGemRemaining);
 
-        // Existing gem status flags (1 = collected, 0 = not)
         for (int i = 0; i < maxObservedGems; i++)
         {
             float collected = 1f;
@@ -181,7 +169,6 @@ public class LabPlayerAgent : Agent
         var a = actions.ContinuousActions;
         if (a.Length < 2) return;
 
-        // Only sample a new action every N steps
         if (holdCounter <= 0)
         {
             float h = Mathf.Clamp(a[0], -1f, 1f); // right/left
