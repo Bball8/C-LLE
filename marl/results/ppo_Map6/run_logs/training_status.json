@@ -1,0 +1,65 @@
+{
+    "LabPlayer": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-499968.onnx",
+                "reward": null,
+                "creation_time": 1775542276.5711966,
+                "auxillary_file_paths": [
+                    "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-499968.pt"
+                ]
+            },
+            {
+                "steps": 999936,
+                "file_path": "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-999936.onnx",
+                "reward": null,
+                "creation_time": 1775542549.2095861,
+                "auxillary_file_paths": [
+                    "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-999936.pt"
+                ]
+            },
+            {
+                "steps": 1499960,
+                "file_path": "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-1499960.onnx",
+                "reward": null,
+                "creation_time": 1775542821.8153036,
+                "auxillary_file_paths": [
+                    "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-1499960.pt"
+                ]
+            },
+            {
+                "steps": 1999960,
+                "file_path": "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-1999960.onnx",
+                "reward": null,
+                "creation_time": 1775543094.1118824,
+                "auxillary_file_paths": [
+                    "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-1999960.pt"
+                ]
+            },
+            {
+                "steps": 2000152,
+                "file_path": "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-2000152.onnx",
+                "reward": null,
+                "creation_time": 1775543094.1324916,
+                "auxillary_file_paths": [
+                    "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-2000152.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2000152,
+            "file_path": "results\\ppo_2_Map6_seed0\\LabPlayer.onnx",
+            "reward": null,
+            "creation_time": 1775543094.1324916,
+            "auxillary_file_paths": [
+                "results\\ppo_2_Map6_seed0\\LabPlayer\\LabPlayer-2000152.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.1.2+cpu"
+    }
+}
