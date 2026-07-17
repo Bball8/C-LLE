@@ -13,7 +13,7 @@
 
 
 <p align="center">
-  <img src="docs/images/overview.png" width="800" alt="Overview of C-LLE">
+  <img src="docs/images/overview.png" width="600" alt="Overview of C-LLE">
 </p>
 
 This repository contains:
